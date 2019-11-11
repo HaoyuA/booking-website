@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Homepage.cshtml";
+}
+@Styles.Render("~/homepage")
+<!--font-family-->
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<div id="home" class="welcome-hero">
+    <div>
+        <div class="welcome-hero-txt">
+            <h2>Easy Stay <br> best place to find and explore <br> that all you need </h2>
+            <p>
+                Find Best Hotel in just One click
+            </p>
+        </div>
+        @using (Html.BeginForm("Index", "Hotels", FormMethod.Get))
+        {
+            <div class="welcome-hero-serch-box">
+
+
+
+                <div class="single-welcome-hero-form">
+                    <h3>City</h3>
+
+                    <form>
+                        @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = " Enter a hotel name or a city" })
+                    </form>
+
+                </div>
+
+                <div class="welcome-hero-serch">
+                    <input type="submit" value="Search" class="welcome-hero-btn" />
+                </div>
+                
+            </div>}
+
+        </div>
+
+</div>
+
+
+

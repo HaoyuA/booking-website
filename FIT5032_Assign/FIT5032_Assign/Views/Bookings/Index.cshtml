@@ -1,0 +1,62 @@
+﻿@model IEnumerable<FIT5032_Assign.Models.Booking>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h2 style="margin-top:20px">My bookings</h2>
+ @if (User.IsInRole("Admin"))
+ {
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+ }
+@foreach (var item in Model)
+{
+    <div class="card" style="width: 700px; margin:0 auto; margin-top: 20px">
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="card-title"> @Html.ActionLink(item.Room.Hotel.HotelName, "Booking", "Hotels",  new { id = item.Room.HotelId },null) </h5>
+                    <p class="card-text">Roomtype:@Html.DisplayFor(modelItem => item.Room.RoomType)</p>
+                    <p class="card-text">
+                        Check in date: @Html.DisplayFor(modelItem => item.CheckinDate.Day)/@Html.DisplayFor(modelItem => item.CheckinDate.Month)/@Html.DisplayFor(modelItem => item.CheckinDate.Year)
+                    </p>
+                    <p class="card-text">
+                        Check out date: @Html.DisplayFor(modelItem => item.CheckoutDate.Day)/@Html.DisplayFor(modelItem => item.CheckoutDate.Month)/@Html.DisplayFor(modelItem => item.CheckoutDate.Year)
+                    </p>
+                    <p class="card-text">Total price:$@Html.DisplayFor(modelItem => item.Price) * @Html.DisplayFor(modelItem => item.RoomNumber) rooms</p>
+
+                    @if (item.Comment == null)
+                    {
+                        <div>@Html.ActionLink("Rating now", "Rating", new { id = item.Id }, new { @class = "btn btn-primary" })</div>
+                    }
+                    else
+                    {
+                    <div>
+                        <p>
+                        Your Ratting:
+                        @for (int i = 0; i < item.Rating; i++)
+                        {
+                            <span class="fa fa-star checked" style=" color:gold"></span>
+                        }
+                        @for (int i = 0; i < 5 - item.Rating; i++)
+                        {
+                            <span class="fa fa-star"></span>
+                        }
+                        </p>
+                    </div>
+                        <div>@Html.ActionLink("Edit rate or comment", "EditRating", new { id = item.Id }, new { @class = "btn btn-primary" })</div>
+                    }
+
+                </div>
+                <div class="col-md-6" style="margin-top:10px">
+                    <img src="@Url.Content("~/Uploads/" + item.Room.Hotel.Image.First().ImagePath)" class="img-responsive center-block" style="object-fit: cover; width: 300px; height: 200px;">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    
