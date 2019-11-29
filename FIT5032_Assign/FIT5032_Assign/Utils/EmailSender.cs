@@ -12,7 +12,7 @@ namespace FIT5032_Assign.Utils
 {
     public class EmailSender
     {
-        private const String API_KEY = "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";
+        private const String API_KEY = "";
 
         public void Send(String toEmail, String subject, String contents, String fileName, String filePath)
         {
